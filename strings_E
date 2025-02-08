@@ -1,0 +1,34 @@
+#include<iostream>
+#include<string>
+#include<cstring>
+#include<cmath>
+#include<iomanip>
+using namespace std;
+
+
+int main() {
+
+	string set, check;
+	int num = 0;
+	getline(cin, set);
+
+	for (int i = 0; i < set.length(); i++) {
+		if (set[i] >= 'a' && set[i] <= 'z'){
+			bool rep = false;
+			for (int j = 0; j < check.length(); j++) {
+				if (set[i] == check[j]){
+					rep = true;
+					break;
+				}
+			}
+			if (!rep) {
+				num++;
+				check += set[i];
+			}
+		}
+	}
+	
+	cout << num;
+
+	return 0;
+}
