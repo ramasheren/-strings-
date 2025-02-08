@@ -1,0 +1,75 @@
+#include<iostream>
+#include<string>
+#include<cstring>
+#include<cmath>
+#include<iomanip>
+using namespace std;
+
+
+int main() {
+
+	//input
+	int tests;
+	cin >> tests;
+	string s[500], t[500];
+	for (int i = 0; i < tests; i++) {
+		cin >> s[i] >> t[i];
+	}
+
+	string check; //for comparison
+	string output[500]; //Y/N
+
+	//compare
+	for (int i = 0; i < tests; i++){ //to go through all tests
+		bool found = false;
+		int strt = -1, iter = 0;
+
+		//search for satarting point in str s
+		for (int j = 0; j < s[i].length(); j++) {
+			if (s[i][j] == t[i][0]) {
+				strt = j;
+				break;
+			}
+		}
+
+		//letter not found
+		if (strt == -1) {
+			output[i] = "NO";
+			continue;
+		}
+
+		while (strt < s[i].length() && iter < t[i].length() && s[i][strt] == t[i][iter]) {  //right
+			check += s[i][strt];
+			iter++;
+			strt++;
+			if (check == t[i]) {
+				found = true;
+				break;
+			}
+		}
+		strt -= 2;
+		while (strt >= 0 && iter < t[i].length() && s[i][strt] == t[i][iter]) {  //left
+			check += s[i][strt];
+			iter++;
+			strt--;
+			if (check == t[i]) {
+				found = true;
+				break;
+			}
+		}
+
+		//check if it's true
+		output[i] = (found ? "YES" : "NO");
+
+		//empty the str to start the next test
+		check.clear();
+
+	}
+
+	//cout output for all tests
+	for (int i = 0; i < tests; i++) {
+		cout << output[i] << endl;
+	}
+
+	return 0;
+}
